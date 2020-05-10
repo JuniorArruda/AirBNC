@@ -20,7 +20,7 @@ request.onload = function () {
             dropdown.appendChild(type_item)
 
         }
-    });
+    })
 
     reloadItens()
 
@@ -29,6 +29,7 @@ request.onload = function () {
 function reloadItens() {
 
     document.querySelectorAll('.card').forEach(_ => _.remove())
+    let dropdown = document.getElementById("dropDownType")
 
     request.response.forEach((item) => {
 
