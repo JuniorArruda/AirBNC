@@ -5,7 +5,33 @@ request.open('GET', url)
 request.responseType = 'json'
 request.send()
 request.onload = function () {
+
+    const dropdown = document.getElementById("dropDownType")
+    let types = []
+    request.response.forEach(element => {
+        if (!types.includes(element.property_type)) {
+            types.push(element.property_type)
+            var type_item = document.createElement("option")
+            type_item.classList.add('dropdown-item')
+            type_item.setAttribute("href", "#")
+            type_item.setAttribute("value", element.property_type)
+            type_item.innerHTML = element.property_type
+            dropdown.appendChild(type_item)
+
+        }
+    });
+
+
+    reloadItens()
+
+
+}
+
+function reloadItens() {
+    document.querySelectorAll('.card').forEach(_ => _.remove())
     request.response.filter((item) => {
+
+
 
         var item_div = document.createElement("div")
         item_div.classList.add('col-md-4')
@@ -28,7 +54,7 @@ request.onload = function () {
 
         var price_node = document.createTextNode(`Reservar por R$ ${item.price}`)
         var price = document.createElement("button");
-        price.setAttribute("href","#")
+        price.setAttribute("href", "#")
         price.classList.add("price")
         price.appendChild(price_node)
 
@@ -40,7 +66,5 @@ request.onload = function () {
         var element = document.getElementById('item_list')
         element.appendChild(item_div)
 
-    }
-
-    )
+    })
 }
