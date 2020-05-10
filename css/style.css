@@ -1,6 +1,7 @@
 .subtitle {
     font-style: italic;
-    float: right
+    float: right;
+    margin: 30px;
 
 }
 
