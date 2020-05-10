@@ -29,15 +29,15 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4">
-				<label class="container-fluid">Filtros:</label>
+			<div class="col-md-6">
+				<label class="container-fluid">Tipo:</label>
 
 				<select id="dropDownType" class="btn dropdown-togle">
 					<option class="dropdown-item">Selecione tipo</option>
 				</select>
 
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<label class="container-fluid">Itens por página:</label>
 
 				<select id="dropDownPerPageItens" class="btn dropdown-togle">
@@ -46,9 +46,6 @@
 				</select>
 			</div>
 
-			<div class="col-md-4">
-				<label class="container-fluid">Diária máx.:</label>
-			</div>
 
 		</div>
 		<div id="item_list" class="row">
@@ -63,11 +60,45 @@
 				</nav>
 			</div>
 		</div>
-	</div>
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/scripts.js"></script>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<p class="modal-title">Selecione o período</p>
+					</div>
+					<div class="modal-body">
+						<div class="form-group row">
+							<label for="example-date-input" class="col-4 col-form-label">Check-in</label>
+							<div class="col-10">
+								<input class="form-control" type="date" value="" id="checkInDate">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="example-date-input" class="col-4 col-form-label">Check-out</label>
+							<div class="col-10">
+								<input class="form-control" type="date" value="" id="checkOutDate">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" >Calcular</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/scripts.js"></script>
 </body>
 
 </html>

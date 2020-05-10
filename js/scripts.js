@@ -41,7 +41,6 @@ function reloadItens() {
     let itensTotal = request.response.filter(typesOfitems).length
     let pagesTotal = itensTotal / itensCountMax
 
-
     var pagingLinks = document.getElementById('pagingLinks')
     document.querySelectorAll('li').forEach(_ => _.remove())
     let count;
@@ -83,6 +82,9 @@ function reloadItens() {
         var price_node = document.createTextNode(`Reservar por R$ ${item.price}`)
         var price = document.createElement("button");
         price.setAttribute("href", "#")
+        price.setAttribute("class","btn btn-info btn-lg")
+        price.setAttribute("data-toggle","modal")
+        price.setAttribute("data-target","#myModal")
         price.classList.add("price")
         price.appendChild(price_node)
 
@@ -102,8 +104,3 @@ function typesOfitems(item) {
     if (dropdown.value == "Selecione tipo") { return true }
     return item.property_type == dropdown.value
 }
-
-
-
-
-
