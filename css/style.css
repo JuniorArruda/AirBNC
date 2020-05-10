@@ -1,0 +1,43 @@
+.subtitle {
+    font-style: italic;
+    float: right
+
+}
+
+.text-center {
+    font-family: cursive;
+}
+
+img {
+    align-self: center;
+}
+
+.card {
+    padding: 0;
+    margin: 30px;
+    min-width: 350px;
+    max-width: 350px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        
+}
+
+.item_type {
+    padding: 5px;
+    background-color: darkturquoise;
+}
+
+.item_description {
+    background-color:turquoise;
+    padding: 10px;
+    max-height: 80px;
+    min-height: 80px;
+}
+
+.price {
+    text-align: center;
+    height: 30px;
+    background-color: mediumpurple;
+}
