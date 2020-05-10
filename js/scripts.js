@@ -8,6 +8,7 @@ request.onload = function () {
 
     let dropdown = document.getElementById("dropDownType")
     dropdown.addEventListener('change', reloadItens)
+
     let types = []
     request.response.forEach(element => {
         if (!types.includes(element.property_type)) {
@@ -28,10 +29,37 @@ request.onload = function () {
 
 function reloadItens() {
 
+    // clear itens div
     document.querySelectorAll('.card').forEach(_ => _.remove())
-    let dropdown = document.getElementById("dropDownType")
 
-    request.response.forEach((item) => {
+    // get user itens per page limit
+    let itensPerPageElement = document.getElementById("dropDownPerPageItens")
+    itensPerPageElement.addEventListener('change', reloadItens)
+    let itensCountMax = itensPerPageElement.value
+
+    // paging system
+    let itensTotal = request.response.filter(typesOfitems).length
+    let pagesTotal = itensTotal / itensCountMax
+
+
+    var pagingLinks = document.getElementById('pagingLinks')
+    document.querySelectorAll('li').forEach(_ => _.remove())
+    let count;
+    for (count = 0; count < pagesTotal; count++) {
+
+        let lilink = document.createElement("li")
+        let link = document.createElement("a")
+        link.classList.add('page-link')
+        link.setAttribute("href", "#")
+        pageNumber = count + 1
+        link.innerHTML = pageNumber
+        link.addEventListener('click', reloadItens)
+        lilink.appendChild(link)
+        pagingLinks.appendChild(lilink)
+    }
+
+    // draw each card filtered by type
+    request.response.filter(typesOfitems).forEach((item) => {
 
         var item_div = document.createElement("div")
         item_div.classList.add('col-md-4')
@@ -66,9 +94,16 @@ function reloadItens() {
         var element = document.getElementById('item_list')
         element.appendChild(item_div)
 
-
     })
 }
+
+function typesOfitems(item) {
+    let dropdown = document.getElementById("dropDownType")
+    if (dropdown.value == "Selecione tipo") { return true }
+    return item.property_type == dropdown.value
+}
+
+
 
 
 
