@@ -6,7 +6,8 @@ request.responseType = 'json'
 request.send()
 request.onload = function () {
 
-    const dropdown = document.getElementById("dropDownType")
+    let dropdown = document.getElementById("dropDownType")
+    dropdown.addEventListener('change', reloadItens)
     let types = []
     request.response.forEach(element => {
         if (!types.includes(element.property_type)) {
@@ -21,17 +22,15 @@ request.onload = function () {
         }
     });
 
-
     reloadItens()
-
 
 }
 
 function reloadItens() {
+
     document.querySelectorAll('.card').forEach(_ => _.remove())
-    request.response.filter((item) => {
 
-
+    request.response.forEach((item) => {
 
         var item_div = document.createElement("div")
         item_div.classList.add('col-md-4')
@@ -66,5 +65,9 @@ function reloadItens() {
         var element = document.getElementById('item_list')
         element.appendChild(item_div)
 
+
     })
 }
+
+
+
