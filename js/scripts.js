@@ -58,43 +58,46 @@ function reloadItens() {
     }
 
     // draw each card filtered by type
-    request.response.filter(typesOfitems).forEach((item) => {
+    request.response.filter(typesOfitems).forEach((item, index) => {
+        if (index < itensCountMax) {
+            var item_div = document.createElement("div")
+            item_div.classList.add('col-md-4')
+            item_div.classList.add('card')
 
-        var item_div = document.createElement("div")
-        item_div.classList.add('col-md-4')
-        item_div.classList.add('card')
+            var item_img = document.createElement("img")
+            item_img.setAttribute("src", `${item.photo}`)
+            item_img.setAttribute("width", 349)
+            item_img.setAttribute("height", 349)
 
-        var item_img = document.createElement("img")
-        item_img.setAttribute("src", `${item.photo}`)
-        item_img.setAttribute("width", 349)
-        item_img.setAttribute("height", 349)
+            var item_type_node = document.createTextNode(`${item.property_type}`);
+            var item_type = document.createElement("div");
+            item_type.classList.add('item_type')
+            item_type.appendChild(item_type_node);
 
-        var item_type_node = document.createTextNode(`${item.property_type}`);
-        var item_type = document.createElement("div");
-        item_type.classList.add('item_type')
-        item_type.appendChild(item_type_node);
+            var item_description_node = document.createTextNode(`${item.name}`)
+            var item_description = document.createElement("div")
+            item_description.classList.add("item_description")
+            item_description.appendChild(item_description_node)
 
-        var item_description_node = document.createTextNode(`${item.name}`)
-        var item_description = document.createElement("div")
-        item_description.classList.add("item_description")
-        item_description.appendChild(item_description_node)
+            var price_node = document.createTextNode(`Reservar por R$ ${item.price}`)
+            var price = document.createElement("button");
+            //price.setAttribute("href", "#")
+            //price.setAttribute("class", "btn btn-info btn-lg")
+            price.setAttribute("class", "btn btn-primary")
+            price.setAttribute("data-toggle", "modal")
+            price.setAttribute("data-target", "#myModal")
+            price.setAttribute("data-price", item.price)
+            price.classList.add("price")
+            price.appendChild(price_node)
 
-        var price_node = document.createTextNode(`Reservar por R$ ${item.price}`)
-        var price = document.createElement("button");
-        price.setAttribute("href", "#")
-        price.setAttribute("class","btn btn-info btn-lg")
-        price.setAttribute("data-toggle","modal")
-        price.setAttribute("data-target","#myModal")
-        price.classList.add("price")
-        price.appendChild(price_node)
+            item_div.appendChild(item_type)
+            item_div.appendChild(item_img)
+            item_div.appendChild(item_description)
+            item_div.appendChild(price)
 
-        item_div.appendChild(item_type)
-        item_div.appendChild(item_img)
-        item_div.appendChild(item_description)
-        item_div.appendChild(price)
-
-        var element = document.getElementById('item_list')
-        element.appendChild(item_div)
+            var element = document.getElementById('item_list')
+            element.appendChild(item_div)
+        }
 
     })
 }
@@ -104,3 +107,42 @@ function typesOfitems(item) {
     if (dropdown.value == "Selecione tipo") { return true }
     return item.property_type == dropdown.value
 }
+
+let dateToday = new Date()
+document.getElementById('checkInDate').valueAsDate = dateToday
+
+let tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+document.getElementById('checkOutDate').valueAsDate = tomorrow
+
+$('#myModal').on('show.bs.modal', function (event) {
+
+    let button = $(event.relatedTarget)
+    let price = button.data('price')
+    let modal = $(this)
+
+    function calcTotal() {
+        let date1 = new Date(document.getElementById("checkInDate").value)
+        let date2 = new Date(document.getElementById("checkOutDate").value)
+        let Difference_In_Time = date2.getTime() - date1.getTime();
+        let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+        let totalValue = Difference_In_Days * price
+        modal.find('#valueTotal').text(`Total da reserva R$${totalValue},00`)
+    }
+    calcTotal()
+
+    $('#calcButton').on('click', function () {
+        calcTotal()
+
+
+    })
+
+
+})
+
+
+
+
+
+
+

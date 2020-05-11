@@ -1,8 +1,8 @@
-.subtitle {
-    font-style: italic;
-    float: right;
-    margin: 30px;
-
+#topTitle {
+    background-color: blueviolet;
+    min-height: 100px;
+    padding: 40px;
+    
 }
 
 .text-center {
